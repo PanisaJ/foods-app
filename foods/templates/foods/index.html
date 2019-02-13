@@ -2,8 +2,8 @@
 <form action="" method="post">
 Restaurant : <input type="text"> <input type="submit" value="search">
 </form>
-ranking by
-<select name="ranking">
+sort :
+<select name="sort">
   <option value="cost">cost</option>
   <option value="recommended">recommended</option>
 </select>
@@ -13,4 +13,9 @@ category
   <option value="noodles">noodles</option>
   <option value="rices">rices</option>
 </select>
+<ul>
+{% for r in restaurant_list %}
+<li>{{r.restaurant_text}}</li>
 
+{% endfor %}
+</ul>

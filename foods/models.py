@@ -6,7 +6,7 @@ class Category(models.Model):
         return self.category_text
 
 class Restaurant(models.Model):
-    restaurant_name = models.CharField(max_length=200)
+    restaurant_text = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     location = models.TextField(null=True)
     contact = models.TextField(null=True)
