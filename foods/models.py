@@ -1,7 +1,11 @@
 from django.db import models
 
+class Category(models.Model):
+    category_text = models.CharField(max_length=100)
+
 class Restaurant(models.Model):
     restaurant_name = models.CharField(max_length=200)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     location = models.TextField(null=True)
     contact = models.TextField(null=True)
     def __str__(self):
@@ -18,3 +22,5 @@ class Menu(models.Model):
     cost = models.IntegerField(default=0)
     def __str__(self):
         return self.menu_text
+
+
