@@ -1,21 +1,22 @@
 <h2>Search Restaurant</h2>
 <form action="" method="post">
-Restaurant : <input type="text"> <input type="submit" value="search">
+Restaurant : <input type="text"> <input type="submit" value="find">
 </form>
-sort :
+
+<form action="{% url 'result'%}" method="post">
+{% csrf_token %}
+sort : 
 <select name="sort">
   <option value="cost">cost</option>
   <option value="recommended">recommended</option>
 </select>
-category
+Category :
 <select name="category">
-  <option value="All">All</option>
-  <option value="noodles">noodles</option>
-  <option value="rices">rices</option>
-</select>
-<ul>
-{% for r in restaurant_list %}
-<li>{{r.restaurant_text}}</li>
-
+{% for c in category_list %}
+  <option value="{{c.category_text}}">{{c.category_text}}</option>
 {% endfor %}
-</ul>
+</select>
+<input type="submit" value="search">
+</form>
+
+
