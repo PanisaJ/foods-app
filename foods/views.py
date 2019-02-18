@@ -18,3 +18,21 @@ def result(request,category_id):
 def newRestaurant(request):
     category_list = Category.objects.all()
     return render(request,'foods/newRestaurant.html',{'category_list':category_list})
+
+def addRestaurant(request):
+    if request.POST.get('restaurant') and request.POST.get('category') and request.POST.get('location') and request.POST.get('contact'):
+        restaurant = Restaurant()
+        restaurant.restaurant_text = request.POST.get('restaurant')
+        restaurant.category = Category.objects.get(category_text=request.POST['category'])
+        restaurant.location = request.POST.get('location')
+        restaurant.contact = request.POST.get('contact')
+        restaurant.save()
+        return HttpResponseRedirect(reverse('index'))
+    else:
+        category_list = Category.objects.all()
+        return render(request,'foods/newRestaurant.html',
+               {'error_message':"You didn't insert some inputs.",
+                'category_list':category_list,}
+        )
+
+
