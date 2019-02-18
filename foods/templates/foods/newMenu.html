@@ -1,0 +1,22 @@
+<h2>Create Menu</h2>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="" method="post">
+{% csrf_token %}
+Menu: <input type="text" name="menu"><br>
+Restaurant : <select name="restaurant">
+{% for r in restaurant_list %}
+  <option value="{{r.restaurant_text}}">{{r.restaurant_text}}</option>
+{% endfor %}
+</select><br>
+cost: <input type="number" name=cost><br>
+<input type="submit" value="save">
+<input type="submit" formaction="{% url 'index'%}" value="back">
+</form>
+
+
+
+
+ 
+
+
+

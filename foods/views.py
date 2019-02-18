@@ -35,4 +35,8 @@ def addRestaurant(request):
                 'category_list':category_list,}
         )
 
+def newMenu(request):
+    restaurant_list = Restaurant.objects.all()
+    return render(request,'foods/newMenu.html',{'restaurant_list':restaurant_list})
+        
 
