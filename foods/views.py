@@ -15,4 +15,6 @@ def result(request,category_id):
     restaurant_list = get_list_or_404(Restaurant,category__pk=category_id)
     return render(request,'foods/result.html',{'restaurant_list':restaurant_list})
     
-
+def newRestaurant(request):
+    category_list = Category.objects.all()
+    return render(request,'foods/newRestaurant.html',{'category_list':category_list})

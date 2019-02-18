@@ -1,0 +1,15 @@
+<h2>Create Restaurant</h2>
+<form action="" method="post">
+{% csrf_token %}
+Restaurant: <input type="text" name="restaurant"><br>
+Category : <select name="category">
+{% for c in category_list %}
+  <option value="{{c.category_text}}">{{c.category_text}}</option>
+{% endfor %}
+</select><br>
+location: <textarea name="location"></textarea><br>
+contact: <textarea name="location"></textarea><br>
+<input type="submit" value="save">
+<input type="submit" formaction="{% url 'index'%}" value="back">
+</form>
+
