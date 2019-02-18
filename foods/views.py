@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Restaurant, Category, Menu
@@ -53,3 +53,7 @@ def addMenu(request):
                {'error_message':"You didn't insert some inputs.",
                 'restaurant_list':restaurant_list,}
         )
+
+def detail(request,restaurant_id):
+    restaurant = get_object_or_404(Restaurant,pk=restaurant_id)
+    return render(request,'foods/detail.html',{'restaurant':restaurant})

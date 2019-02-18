@@ -13,8 +13,8 @@ sort :
 </select>
 Category :
 <select name="category">
-{% for c in category_list %}
-  <option value="{{c.category_text}}">{{c.category_text}}</option>
+{% for category in category_list %}
+  <option value="{{category.category_text}}">{{category.category_text}}</option>
 {% endfor %}
 </select>
 <input type="submit" value="search">

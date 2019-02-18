@@ -1,6 +1,6 @@
 <h2>Restaurant</h2>
 <ul>
-{% for r in restaurant_list %}
-<li>{{ r.restaurant_text }}</li>
+{% for restaurant in restaurant_list %}
+<li><a href="{% url 'detail' restaurant.id %}">{{ restaurant.restaurant_text }}</a></li>
 {% endfor %}
 </ul>

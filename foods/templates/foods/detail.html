@@ -1,0 +1,18 @@
+<h2>{{restaurant.restaurant_text}}</h2>
+<style>
+ table, th ,td{border:1px solid black; border-collapse: collapse;}
+</style>
+<table width="30%">
+     <tr>
+         <th>Menu</th>
+         <th>Cost(Bath)</th>
+     </tr>
+{% for menu in restaurant.menu_set.all %}
+    <tr><td>{{menu.menu_text}}</td><td><center>{{menu.cost}}</center></td></tr>
+{% endfor %}
+</table>
+<p>Location: {{restaurant.location}}</p><br>
+<p>Contact: {{restaurant.contact}}</p>
+
+
+

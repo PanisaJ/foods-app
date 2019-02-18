@@ -4,8 +4,8 @@
 {% csrf_token %}
 Menu: <input type="text" name="menu"><br>
 Restaurant : <select name="restaurant">
-{% for r in restaurant_list %}
-  <option value="{{r.restaurant_text}}">{{r.restaurant_text}}</option>
+{% for restaurant in restaurant_list %}
+  <option value="{{restaurant.restaurant_text}}">{{restaurant.restaurant_text}}</option>
 {% endfor %}
 </select><br>
 cost: <input type="number" name=cost><br>
