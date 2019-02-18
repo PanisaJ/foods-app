@@ -3,7 +3,7 @@
 Restaurant : <input type="text"> <input type="submit" value="find">
 </form>
 
-<form action="{% url 'result'%}" method="post">
+<form action="{% url 'search'%}" method="post">
 {% csrf_token %}
 sort : 
 <select name="sort">

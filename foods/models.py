@@ -13,7 +13,7 @@ class Restaurant(models.Model):
     scores = models.IntegerField(default=0)
     average_cost = models.IntegerField(default=0)
     def __str__(self):
-        return self.restaurant_name
+        return self.restaurant_text
 
 class Review(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
