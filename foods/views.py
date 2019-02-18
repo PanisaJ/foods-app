@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_list_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Restaurant, Category
+from .models import Restaurant, Category, Menu
 
 def index(request):
     category_list = Category.objects.all()
@@ -39,4 +39,17 @@ def newMenu(request):
     restaurant_list = Restaurant.objects.all()
     return render(request,'foods/newMenu.html',{'restaurant_list':restaurant_list})
         
-
+def addMenu(request):
+    if request.POST.get('menu') and request.POST.get('restaurant') and request.POST.get('cost'):
+        menu = Menu()
+        menu.menu_text = request.POST.get('menu')
+        menu.restaurant = Restaurant.objects.get(restaurant_text=request.POST['restaurant'])
+        menu.cost = request.POST.get('cost')
+        menu.save()
+        return HttpResponseRedirect(reverse('index'))
+    else:
+        restaurant_list = Restaurant.objects.all()
+        return render(request,'foods/newMenu.html',
+               {'error_message':"You didn't insert some inputs.",
+                'restaurant_list':restaurant_list,}
+        )

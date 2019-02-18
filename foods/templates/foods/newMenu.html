@@ -1,6 +1,6 @@
 <h2>Create Menu</h2>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<form action="" method="post">
+<form action="{% url 'addMenu'%}" method="post">
 {% csrf_token %}
 Menu: <input type="text" name="menu"><br>
 Restaurant : <select name="restaurant">

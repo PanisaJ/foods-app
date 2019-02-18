@@ -9,4 +9,5 @@ urlpatterns = [
     path('newRestaurant/', views.newRestaurant, name='newRestaurant'),
     path('addRestaurant/', views.addRestaurant, name='addRestaurant'),
     path('newMenu/', views.newMenu, name='newMenu'),
+    path('addMenu/', views.addMenu, name='addMenu'),
 ]
