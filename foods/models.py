@@ -10,6 +10,8 @@ class Restaurant(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     location = models.TextField(null=True)
     contact = models.TextField(null=True)
+    scores = models.IntegerField(default=0)
+    average_cost = models.IntegerField(default=0)
     def __str__(self):
         return self.restaurant_name
 
