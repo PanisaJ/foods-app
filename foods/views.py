@@ -11,14 +11,10 @@ def findRestaurant(request):
     if request.GET.get('find'):
         restaurant_list = Restaurant.objects.filter(restaurant_text__contains=request.GET['find'])
         if restaurant_list.count() == 0:
-            print("not exist")
             category_list = Category.objects.all()
             error_message = "Sorry, no restaurants matched '" + request.GET['find'] + "'. Please try again."
             return render(request,'foods/index.html',{'category_list':category_list,'error_message':error_message,})
         else:
-            print("exist")
-            for i in restaurant_list:
-                print(i.restaurant_text)
             return render(request,'foods/Result.html',{'restaurant_list':restaurant_list})
     else:
         category_list = Category.objects.all()
