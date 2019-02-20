@@ -15,6 +15,11 @@
 <p>Contact: {{restaurant.contact}}</p>
 
 <h3>Review</h3>
+<table width="100%">
+{% for review in restaurant.review_set.all %}
+     <tr><td>comment{{ forloop.counter }} scores : {{review.scores}}<br>{{review.review_text}}<br>{{review.username}}</td></tr>
+{% endfor %}
+</table><br>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form action="{% url 'review' restaurant.id%}" method="post" >
 {% csrf_token %}
