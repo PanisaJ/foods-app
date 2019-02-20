@@ -7,14 +7,27 @@ def index(request):
     category_list = Category.objects.all()
     return render(request,'foods/index.html',{'category_list':category_list})
 
-def search(request):
-    category = Category.objects.get(category_text=request.GET['category'])
-    return HttpResponseRedirect(reverse('result',args=(category.id,)))
+def findRestaurant(request):
+    if request.GET.get('find'):
+        restaurant_list = Restaurant.objects.filter(restaurant_text__contains=request.GET['find'])
+        if restaurant_list.count() == 0:
+            print("not exist")
+            category_list = Category.objects.all()
+            error_message = "Sorry, no restaurants matched '" + request.GET['find'] + "'. Please try again."
+            return render(request,'foods/index.html',{'category_list':category_list,'error_message':error_message,})
+        else:
+            print("exist")
+            for i in restaurant_list:
+                print(i.restaurant_text)
+            return render(request,'foods/Result.html',{'restaurant_list':restaurant_list})
+    else:
+        category_list = Category.objects.all()
+        return render(request,'foods/index.html',{'category_list':category_list,'error_message':"You didn't insert input.",})
 
-def result(request,category_id):
-    restaurant_list = get_list_or_404(Restaurant,category__pk=category_id)
-    return render(request,'foods/result.html',{'restaurant_list':restaurant_list})
-    
+def searchRestaurant(request):
+    restaurant_list = Restaurant.objects.filter(category__category_text=request.GET['category'])
+    return render(request,'foods/Result.html',{'restaurant_list':restaurant_list})
+
 def newRestaurant(request):
     category_list = Category.objects.all()
     return render(request,'foods/newRestaurant.html',{'category_list':category_list})

@@ -4,8 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('search/', views.search, name='search'),
-    path('<int:category_id>/result/', views.result, name='result'),
+    path('search/', views.searchRestaurant, name='searchRestaurant'),
+    path('find/', views.findRestaurant, name='findRestaurant'),
     path('newRestaurant/', views.newRestaurant, name='newRestaurant'),
     path('addRestaurant/', views.addRestaurant, name='addRestaurant'),
     path('newMenu/', views.newMenu, name='newMenu'),

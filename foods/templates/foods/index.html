@@ -3,12 +3,12 @@
 
 <h2>Search Restaurant</h2>
 
-<form action="" method="get">
-Restaurant : <input type="text"> <input type="submit" value="find">
+<form action="{% url 'findRestaurant'%}" method="get">
+Restaurant : <input type="text" name="find"> <input type="submit" value="find">
 </form>
 
-<form action="{% url 'search'%}" method="get">
-{% csrf_token %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'searchRestaurant'%}" method="get">
 sort : 
 <select name="sort">
   <option value="cost">cost</option>
