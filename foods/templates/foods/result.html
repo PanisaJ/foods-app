@@ -3,6 +3,7 @@
 </form>
 <h2>Restaurant</h2>
 {% if sort_by %}<p>sort : {{sort_by}}</p>{% endif %}
+{% if find_with %}<p>search keyword : {{find_with}}</p>{% endif %}
 <ul>
 {% for restaurant in restaurant_list %}
 <li><a href="{% url 'detail' restaurant.id %}">{{ restaurant.restaurant_text }}</a></li>
