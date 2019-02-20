@@ -14,5 +14,19 @@
 <p>Location: {{restaurant.location}}</p><br>
 <p>Contact: {{restaurant.contact}}</p>
 
-
-
+<h3>Review</h3>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'review' restaurant.id%}" method="post" >
+{% csrf_token %}
+Comment:
+<textarea name=review></textarea><br>
+Name: <input type="text" name="username"><br>
+score: 
+{% for i in range %}
+     <input type="radio" name="score" id="score{{ forloop.counter }}" value="{{ forloop.counter }}">
+     <label for="score{{ forloop.counter }}">{{ forloop.counter }}</label>
+{% endfor %}
+<br>
+<input type="submit" value="Send">
+<input type="submit" formaction="{% url 'index'%}" value="back">
+</form>

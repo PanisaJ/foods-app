@@ -11,4 +11,5 @@ urlpatterns = [
     path('newMenu/', views.newMenu, name='newMenu'),
     path('addMenu/', views.addMenu, name='addMenu'),
     path('<int:restaurant_id>/detail/', views.detail, name='detail'),
+    path('<int:restaurant_id>/review/', views.review, name='review'),
 ]
