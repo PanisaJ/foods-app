@@ -4,6 +4,7 @@
 {% csrf_token %}
 Restaurant: <input type="text" name="restaurant"><br>
 Category : <select name="category">
+<option selected disabled hidden>Choose here</option>
 {% for c in category_list %}
   <option value="{{c.category_text}}">{{c.category_text}}</option>
 {% endfor %}
