@@ -2,6 +2,7 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Restaurant, Category, Menu, Review
+from statistics import mean
 
 def index(request):
     category_list = Category.objects.all()
@@ -30,7 +31,7 @@ def searchRestaurant(request):
     restaurant_list = Restaurant.objects.filter(category__category_text=request.GET['category'])
     if restaurant_list.count() == 0:
         category_list = Category.objects.all()
-        error_message = "0 Restaurants : Sorry, no restaurants were found in '" + request.GET['category'] + "' category."
+        error_message = "Sorry, no restaurants were found in '" + request.GET['category'] + "' category."
         return render(request,'foods/index.html',
                    {'category_list':category_list,
                     'error_message':error_message,})
@@ -42,6 +43,7 @@ def searchRestaurant(request):
         return render(request,'foods/result.html',
            {'restaurant_list':restaurant_list,
             'sort_by':request.GET.get('sort'),'category':request.GET.get('category')})
+
 def newRestaurant(request):
     category_list = Category.objects.all()
     return render(request,'foods/newRestaurant.html',{'category_list':category_list})
@@ -69,14 +71,13 @@ def newMenu(request):
 def addMenu(request):
     if request.POST.get('menu') and request.POST.get('restaurant') and request.POST.get('cost'):
         restaurant = Restaurant.objects.get(restaurant_text=request.POST['restaurant'])
-        restaurant.average_cost *= restaurant.menu_set.count()
         menu = Menu()
         menu.menu_text = request.POST.get('menu')
         menu.restaurant = restaurant
         menu.cost = request.POST.get('cost')
         menu.save()
-        restaurant.average_cost += int(request.POST.get('cost'))
-        restaurant.average_cost /= restaurant.menu_set.count()
+        cost_list = Menu.objects.filter(restaurant=restaurant).values_list('cost',flat=True)
+        restaurant.average_cost = mean(cost_list)
         restaurant.save()
         return HttpResponseRedirect(reverse('index'))
     else:
@@ -93,15 +94,14 @@ def detail(request,restaurant_id):
 def review(request,restaurant_id):
     if request.POST.get('review') and request.POST.get('username') and request.POST.get('score'):
         restaurant = Restaurant.objects.get(pk=restaurant_id)
-        restaurant.average_scores *= restaurant.review_set.count()
         review = Review()
         review.review_text = request.POST.get('review')
         review.username = request.POST.get('username')
         review.scores = request.POST.get('score')
         review.restaurant = restaurant
         review.save()
-        restaurant.average_scores += int(request.POST.get('score'))
-        restaurant.average_scores /= restaurant.review_set.count()
+        scores_list = Review.objects.filter(restaurant=restaurant).values_list('scores',flat=True)
+        restaurant.average_scores = mean(scores_list)
         restaurant.save()
         return HttpResponseRedirect(reverse('detail',args=(restaurant_id,)))
     else:

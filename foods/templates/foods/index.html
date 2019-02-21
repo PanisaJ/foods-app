@@ -2,12 +2,12 @@
 <a href="{% url 'newMenu'%}">New Menu</a></p>
 
 <h2>Search Restaurant</h2>
-
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form action="{% url 'findRestaurant'%}" method="get">
 Restaurant : <input type="text" name="find"> <input type="submit" value="find">
 </form>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
 <form action="{% url 'searchRestaurant'%}" method="get">
 sort : 
 <select name="sort">
