@@ -28,14 +28,20 @@ def findRestaurant(request):
 
 def searchRestaurant(request):
     restaurant_list = Restaurant.objects.filter(category__category_text=request.GET['category'])
-    if request.GET.get('sort') == "cost" :
-        restaurant_list = restaurant_list.order_by('average_cost')
+    if restaurant_list.count() == 0:
+        category_list = Category.objects.all()
+        error_message = "0 Restaurants : Sorry, no restaurants were found in '" + request.GET['category'] + "' category."
+        return render(request,'foods/index.html',
+                   {'category_list':category_list,
+                    'error_message':error_message,})
     else:
-        restaurant_list = restaurant_list.order_by('-average_scores')
-    return render(request,'foods/result.html',
+        if request.GET.get('sort') == "cost" :
+             restaurant_list = restaurant_list.order_by('average_cost')
+        else:
+             restaurant_list = restaurant_list.order_by('-average_scores')
+        return render(request,'foods/result.html',
            {'restaurant_list':restaurant_list,
-            'sort_by':request.GET.get('sort'),})
-
+            'sort_by':request.GET.get('sort'),'category':request.GET.get('category')})
 def newRestaurant(request):
     category_list = Category.objects.all()
     return render(request,'foods/newRestaurant.html',{'category_list':category_list})

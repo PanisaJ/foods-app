@@ -2,7 +2,7 @@
 <p align="right"><input type="submit" value="back"></p>
 </form>
 <h2>Restaurant</h2>
-{% if sort_by %}<p>sort : {{sort_by}}</p>{% endif %}
+{% if sort_by %}<p>sort : {{sort_by}}<br>category : {{category}}</p>{% endif %} 
 {% if find_with %}<p>search keyword : {{find_with}}</p>{% endif %}
 <ul>
 {% for restaurant in restaurant_list %}
